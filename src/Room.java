@@ -53,14 +53,12 @@ public class Room {
     public void setStatus(String status) {
         this.status = status;
     }
-
+    // Guest details are stored internally but not displayed in room listings.
     @Override
     public String toString() {
         return "Room{" +
                 "roomNo=" + roomNo +
-                ", guestName='" + guestName + '\'' +
                 ", roomType='" + roomType + '\'' +
-                ", checkInDate='" + checkInDate + '\'' +
                 ", status='" + status + '\'' +
                 '}';
     }
