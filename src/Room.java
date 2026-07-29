@@ -56,10 +56,9 @@ public class Room {
     public String toString() {
         return "Room{" +
                 "roomNo=" + roomNo +
-                ", guestName='" + guestName + '\'' +
                 ", roomType='" + roomType + '\'' +
-                ", checkInDate='" + checkInDate + '\'' +
                 ", status='" + status + '\'' +
                 '}';
+    }
     }
 }
