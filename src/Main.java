@@ -15,15 +15,20 @@ public class Main {
 
         do {
 
-            System.out.println("\n===== HOTEL ROOM BOOKING SYSTEM =====");
-            System.out.println("1. Check in");
+            System.out.println("\n==========================================");
+            System.out.println("      HOTEL ROOM BOOKING SYSTEM");
+            System.out.println("==========================================");
+            System.out.println();
+            System.out.println("1. Check In");
             System.out.println("2. View All Rooms");
             System.out.println("3. Search by Status");
             System.out.println("4. Search by Room Type");
-            System.out.println("5. Update Booking");
-            System.out.println("6. Check out");
+            System.out.println("5. Cancel Booking");
+            System.out.println("6. Check Out");
             System.out.println("7. Exit");
-            System.out.print("Enter Choice: ");
+            System.out.println();
+            System.out.println("------------------------------------------");
+            System.out.print("Enter Your Choice: ");
 
             choice = sc.nextInt();
             sc.nextLine();
@@ -32,13 +37,18 @@ public class Main {
 
                 case 1:
 
-                    System.out.println("\nSelect Room Type");
+                    System.out.println("\n==========================================");
+                    System.out.println("              CHECK IN");
+                    System.out.println("==========================================");
+                    System.out.println();
+                    System.out.println("Select Room Type");
+                    System.out.println("------------------------------------------");
                     System.out.println("1. Single");
                     System.out.println("2. Double");
                     System.out.println("3. Deluxe");
                     System.out.println("4. Suite");
-
-                    System.out.print("Enter Choice: ");
+                    System.out.println("------------------------------------------");
+                    System.out.print("Enter Your Choice: ");
                     int roomChoice = sc.nextInt();
                     sc.nextLine();
 
@@ -68,6 +78,10 @@ public class Main {
                     int roomNo = sc.nextInt();
                     sc.nextLine();
 
+                    if (!manager.isRoomAvailable(roomNo)) {
+                        break;
+                    }
+
                     System.out.print("Guest Name: ");
                     String guestName = sc.nextLine();
 
@@ -84,8 +98,15 @@ public class Main {
                         date = sc.nextLine();
 
                         try {
-                            LocalDate.parse(date, formatter);
+                            LocalDate checkInDate = LocalDate.parse(date, formatter);
+
+                            if (checkInDate.isBefore(LocalDate.now())) {
+                                System.out.println("Check-in date cannot be in the past.");
+                                continue;
+                            }
+
                             break;
+
                         } catch (DateTimeParseException e) {
                             System.out.println("Invalid date! Please enter a valid date.");
                         }
@@ -100,34 +121,93 @@ public class Main {
 
                 case 3:
 
-                    System.out.print("Enter Status: ");
-                    String s = sc.nextLine();
-                    manager.searchByStatus(s);
+                    System.out.println("\n==========================================");
+                    System.out.println("          SEARCH BY STATUS");
+                    System.out.println("==========================================");
+                    System.out.println("1. Available");
+                    System.out.println("2. Booked");
+                    System.out.println("------------------------------------------");
+                    System.out.print("Enter Your Choice: ");
+
+                    int statusChoice = sc.nextInt();
+                    sc.nextLine();
+
+                    String status = "";
+
+                    switch (statusChoice) {
+
+                        case 1:
+                            status = "Available";
+                            break;
+
+                        case 2:
+                            status = "Booked";
+                            break;
+
+                        default:
+                            System.out.println("Invalid Status!");
+                            continue;
+                    }
+
+                    manager.searchByStatus(status);
                     break;
 
                 case 4:
 
-                    System.out.print("Enter Room Type: ");
-                    String t = sc.nextLine();
-                    manager.searchByType(t);
+                    System.out.println("\n==========================================");
+                    System.out.println("        SEARCH BY ROOM TYPE");
+                    System.out.println("==========================================");
+                    System.out.println();
+                    System.out.println("1. Single");
+                    System.out.println("2. Double");
+                    System.out.println("3. Deluxe");
+                    System.out.println("4. Suite");
+                    System.out.println();
+                    System.out.println("------------------------------------------");
+                    System.out.print("Enter Your Choice: ");
+
+                    int typeChoice = sc.nextInt();
+                    sc.nextLine();
+
+                    String type = "";
+
+                    switch (typeChoice) {
+
+                        case 1:
+                            type = "Single";
+                            break;
+
+                        case 2:
+                            type = "Double";
+                            break;
+
+                        case 3:
+                            type = "Deluxe";
+                            break;
+
+                        case 4:
+                            type = "Suite";
+                            break;
+
+                        default:
+                            System.out.println("Invalid Room Type!");
+                            continue;
+                    }
+
+                    manager.searchByType(type);
                     break;
 
                 case 5:
 
+                    System.out.println("\n==========================================");
+                    System.out.println("          CANCEL BOOKING");
+                    System.out.println("==========================================");
+
                     System.out.print("Enter Room Number: ");
-                    int updateNo = sc.nextInt();
+                    int cancelRoom = sc.nextInt();
                     sc.nextLine();
 
-                    System.out.print("New Guest Name: ");
-                    String g = sc.nextLine();
-
-                    System.out.print("New Room Type: ");
-                    String rt = sc.nextLine();
-
-                    System.out.print("New Check-In Date: ");
-                    String d = sc.nextLine();
-
-                    manager.updateBooking(updateNo, g, rt, d);
+                    manager.cancelBooking(cancelRoom);
                     break;
 
                 case 6:
