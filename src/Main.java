@@ -20,7 +20,7 @@ public class Main {
             System.out.println("2. View All Rooms");
             System.out.println("3. Search by Status");
             System.out.println("4. Search by Room Type");
-            System.out.println("5. Update Booking");
+            System.out.println("5. Cancel Booking");
             System.out.println("6. Check out");
             System.out.println("7. Exit");
             System.out.print("Enter Choice: ");
@@ -114,20 +114,10 @@ public class Main {
 
                 case 5:
 
-                    System.out.print("Enter Room Number: ");
-                    int updateNo = sc.nextInt();
-                    sc.nextLine();
+                    System.out.print("Enter Room Number to Cancel Booking: ");
+                    int cancelRoom = sc.nextInt();
 
-                    System.out.print("New Guest Name: ");
-                    String g = sc.nextLine();
-
-                    System.out.print("New Room Type: ");
-                    String rt = sc.nextLine();
-
-                    System.out.print("New Check-In Date: ");
-                    String d = sc.nextLine();
-
-                    manager.updateBooking(updateNo, g, rt, d);
+                    manager.cancelBooking(cancelRoom);
                     break;
 
                 case 6:

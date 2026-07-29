@@ -115,25 +115,22 @@ public class HotelManager {
     }
 
     // Update Booking
-    public void updateBooking(int roomNo,
-                              String guestName,
-                              String roomType,
-                              String checkInDate
-                              ) {
+    public void cancelBooking(int roomNo) {
 
         for (Room room : rooms) {
 
             if (room.getRoomNo() == roomNo) {
+
                 if (room.getStatus().equalsIgnoreCase("Available")) {
-                    System.out.println("This room is not currently available.");
+                    System.out.println("No booking found for this room.");
                     return;
                 }
 
-                room.setGuestName(guestName);
-                room.setRoomType(roomType);
-                room.setCheckInDate(checkInDate);
+                room.setGuestName(null);
+                room.setCheckInDate(null);
+                room.setStatus("Available");
 
-                System.out.println("Booking Updated Successfully.");
+                System.out.println("Booking Cancelled Successfully.");
                 return;
             }
         }
