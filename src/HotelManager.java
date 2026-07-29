@@ -35,8 +35,16 @@ public class HotelManager {
                 room.setCheckInDate(checkInDate);
                 room.setStatus("Booked");
 
-                System.out.println("Room booked successfully!");
-                System.out.println("Have a great day!!!");
+                System.out.println("\n==========================================");
+                System.out.println("          BOOKING CONFIRMED");
+                System.out.println("==========================================");
+                System.out.println("Guest Name   : " + guestName);
+                System.out.println("Room Number  : " + room.getRoomNo());
+                System.out.println("Room Type    : " + room.getRoomType());
+                System.out.println("Check-In Date: " + checkInDate);
+                System.out.println("Status       : " + room.getStatus());
+                System.out.println("==========================================");
+                System.out.println("Thank you for choosing our hotel!");
                 return;
             }
         }
@@ -44,7 +52,6 @@ public class HotelManager {
         System.out.println("Room not found.");
     }
 
-    // View All Rooms
     public void viewAllRooms() {
 
         if (rooms.isEmpty()) {
@@ -52,25 +59,34 @@ public class HotelManager {
             return;
         }
 
+        System.out.println("--------------------------------------------");
+        System.out.printf("%-10s %-15s %-15s%n",
+                "Room No", "Room Type", "Status");
+        System.out.println("--------------------------------------------");
+
         for (Room room : rooms) {
-            System.out.println(room);
+            displayRoom(room);
         }
     }
-    // Available rooms
+    // Display Available Rooms by Type
     public void showAvailableRooms(String type) {
 
         boolean found = false;
 
-        System.out.println("\nAvailable " + type + " Rooms");
-        System.out.println("--------------------------");
+        System.out.println("\n==========================================");
+        System.out.println("      AVAILABLE " + type.toUpperCase() + " ROOMS");
+        System.out.println("==========================================");
+
+        System.out.printf("%-10s %-15s %-15s%n",
+                "Room No", "Room Type", "Status");
+        System.out.println("------------------------------------------");
 
         for (Room room : rooms) {
 
             if (room.getRoomType().equalsIgnoreCase(type)
                     && room.getStatus().equalsIgnoreCase("Available")) {
 
-                System.out.println("Room No : " + room.getRoomNo());
-
+                displayRoom(room);
                 found = true;
             }
         }
@@ -78,67 +94,125 @@ public class HotelManager {
         if (!found) {
             System.out.println("No " + type + " rooms are available.");
         }
+
+        System.out.println("==========================================");
     }
 
-    // Search by Status
-    public void searchByStatus(String status) {
-
-        boolean found = false;
-
-        for (Room room : rooms) {
-            if (room.getStatus().equalsIgnoreCase(status)) {
-                System.out.println(room);
-                found = true;
-            }
-        }
-
-        if (!found) {
-            System.out.println("No Rooms Found.");
-        }
-    }
-
-    // Search by Room Type
-    public void searchByType(String type) {
-
-        boolean found = false;
-
-        for (Room room : rooms) {
-            if (room.getRoomType().equalsIgnoreCase(type)) {
-                System.out.println(room);
-                found = true;
-            }
-        }
-
-        if (!found) {
-            System.out.println("No Rooms Found.");
-        }
-    }
-
-    // Update Booking
-    public void updateBooking(int roomNo,
-                              String guestName,
-                              String roomType,
-                              String checkInDate
-                              ) {
+    // check if room is available
+    public boolean isRoomAvailable(int roomNo) {
 
         for (Room room : rooms) {
 
             if (room.getRoomNo() == roomNo) {
+
                 if (room.getStatus().equalsIgnoreCase("Available")) {
-                    System.out.println("This room is not currently available.");
+                    return true;
+                }
+
+                System.out.println("Room is already booked!");
+                return false;
+            }
+        }
+
+        System.out.println("Room not found.");
+        return false;
+    }
+
+    // Search Rooms by Status
+    public void searchByStatus(String status) {
+
+        boolean found = false;
+
+        System.out.println("\n==========================================");
+        System.out.println("      SEARCH BY STATUS");
+        System.out.println("==========================================");
+        System.out.println("Status : " + status);
+        System.out.println("------------------------------------------");
+
+        System.out.printf("%-10s %-15s %-15s%n",
+                "Room No", "Room Type", "Status");
+        System.out.println("------------------------------------------");
+
+        for (Room room : rooms) {
+
+            if (room.getStatus().equalsIgnoreCase(status)) {
+
+                displayRoom(room);
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No Rooms Found.");
+        }
+
+        System.out.println("==========================================");
+    }
+
+    // Search Rooms by Type
+    public void searchByType(String type) {
+
+        boolean found = false;
+
+        System.out.println("\n==========================================");
+        System.out.println("      SEARCH BY ROOM TYPE");
+        System.out.println("==========================================");
+        System.out.println("Room Type : " + type);
+        System.out.println("------------------------------------------");
+
+        System.out.printf("%-10s %-15s %-15s%n",
+                "Room No", "Room Type", "Status");
+        System.out.println("------------------------------------------");
+
+        for (Room room : rooms) {
+
+            if (room.getRoomType().equalsIgnoreCase(type)) {
+
+                displayRoom(room);
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No Rooms Found.");
+        }
+
+        System.out.println("==========================================");
+    }
+
+    // Cancel Booking
+    public void cancelBooking(int roomNo) {
+
+        for (Room room : rooms) {
+
+            if (room.getRoomNo() == roomNo) {
+
+                if (room.getStatus().equalsIgnoreCase("Available")) {
+                    System.out.println("No booking exists for this room.");
                     return;
                 }
 
-                room.setGuestName(guestName);
-                room.setRoomType(roomType);
-                room.setCheckInDate(checkInDate);
+                room.setGuestName("-");
+                room.setCheckInDate("-");
+                room.setStatus("Available");
 
-                System.out.println("Booking Updated Successfully.");
+                System.out.println("\n==========================================");
+                System.out.println("      BOOKING CANCELLED");
+                System.out.println("==========================================");
+                System.out.println("Room Number : " + roomNo);
+                System.out.println("Status      : Available");
+                System.out.println("==========================================");
                 return;
             }
         }
 
         System.out.println("Room Not Found.");
+    }
+    private void displayRoom(Room room) {
+        System.out.printf("%-10d %-15s %-15s%n",
+                room.getRoomNo(),
+                room.getRoomType(),
+                room.getStatus());
     }
 
     // Check out
