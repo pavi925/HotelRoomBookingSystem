@@ -1,9 +1,10 @@
-import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -18,17 +19,13 @@ public class Main {
             System.out.println("\n==========================================");
             System.out.println("      HOTEL ROOM BOOKING SYSTEM");
             System.out.println("==========================================");
-            System.out.println();
             System.out.println("1. Check In");
             System.out.println("2. View All Rooms");
             System.out.println("3. Search by Status");
             System.out.println("4. Search by Room Type");
             System.out.println("5. Cancel Booking");
-            System.out.println("6. Check out");
-            System.out.println("5. Cancel Booking");
             System.out.println("6. Check Out");
             System.out.println("7. Exit");
-            System.out.println();
             System.out.println("------------------------------------------");
             System.out.print("Enter Your Choice: ");
 
@@ -40,9 +37,8 @@ public class Main {
                 case 1:
 
                     System.out.println("\n==========================================");
-                    System.out.println("              CHECK IN");
+                    System.out.println("               CHECK IN");
                     System.out.println("==========================================");
-                    System.out.println();
                     System.out.println("Select Room Type");
                     System.out.println("------------------------------------------");
                     System.out.println("1. Single");
@@ -51,6 +47,7 @@ public class Main {
                     System.out.println("4. Suite");
                     System.out.println("------------------------------------------");
                     System.out.print("Enter Your Choice: ");
+
                     int roomChoice = sc.nextInt();
                     sc.nextLine();
 
@@ -76,7 +73,7 @@ public class Main {
 
                     manager.showAvailableRooms(roomType);
 
-                    System.out.print("Enter Room Number: ");
+                    System.out.print("\nEnter Room Number: ");
                     int roomNo = sc.nextInt();
                     sc.nextLine();
 
@@ -100,6 +97,7 @@ public class Main {
                         date = sc.nextLine();
 
                         try {
+
                             LocalDate checkInDate = LocalDate.parse(date, formatter);
 
                             if (checkInDate.isBefore(LocalDate.now())) {
@@ -118,6 +116,7 @@ public class Main {
                     break;
 
                 case 2:
+
                     manager.viewAllRooms();
                     break;
 
@@ -137,17 +136,14 @@ public class Main {
                     String status = "";
 
                     switch (statusChoice) {
-
                         case 1:
                             status = "Available";
                             break;
-
                         case 2:
                             status = "Booked";
                             break;
-
                         default:
-                            System.out.println("Invalid Status!");
+                            System.out.println("Invalid Choice!");
                             continue;
                     }
 
@@ -159,12 +155,10 @@ public class Main {
                     System.out.println("\n==========================================");
                     System.out.println("        SEARCH BY ROOM TYPE");
                     System.out.println("==========================================");
-                    System.out.println();
                     System.out.println("1. Single");
                     System.out.println("2. Double");
                     System.out.println("3. Deluxe");
                     System.out.println("4. Suite");
-                    System.out.println();
                     System.out.println("------------------------------------------");
                     System.out.print("Enter Your Choice: ");
 
@@ -174,25 +168,20 @@ public class Main {
                     String type = "";
 
                     switch (typeChoice) {
-
                         case 1:
                             type = "Single";
                             break;
-
                         case 2:
                             type = "Double";
                             break;
-
                         case 3:
                             type = "Deluxe";
                             break;
-
                         case 4:
                             type = "Suite";
                             break;
-
                         default:
-                            System.out.println("Invalid Room Type!");
+                            System.out.println("Invalid Choice!");
                             continue;
                     }
 
@@ -203,14 +192,6 @@ public class Main {
 
                     System.out.print("Enter Room Number to Cancel Booking: ");
                     int cancelRoom = sc.nextInt();
-
-                    manager.cancelBooking(cancelRoom);
-                    System.out.println("\n==========================================");
-                    System.out.println("          CANCEL BOOKING");
-                    System.out.println("==========================================");
-
-                    System.out.print("Enter Room Number: ");
-                    int cancelRoom = sc.nextInt();
                     sc.nextLine();
 
                     manager.cancelBooking(cancelRoom);
@@ -219,16 +200,19 @@ public class Main {
                 case 6:
 
                     System.out.print("Enter Room Number: ");
-                    int remove = sc.nextInt();
+                    int room = sc.nextInt();
+                    sc.nextLine();
 
-                    manager.checkOut(remove);
+                    manager.checkOut(room);
                     break;
 
                 case 7:
-                    System.out.println("\n========================================");
-                    System.out.println(" Thank you for using our Hotel Room Booking System!!!");
-                    System.out.println("          Have a Great Day!");
-                    System.out.println("========================================");
+
+                    System.out.println("\n==========================================");
+                    System.out.println("   THANK YOU FOR USING OUR HOTEL SYSTEM");
+                    System.out.println("==========================================");
+                    System.out.println("        Have a Great Day!");
+                    System.out.println("==========================================");
                     break;
 
                 default:
