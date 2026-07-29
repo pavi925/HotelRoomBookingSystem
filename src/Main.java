@@ -24,6 +24,8 @@ public class Main {
             System.out.println("3. Search by Status");
             System.out.println("4. Search by Room Type");
             System.out.println("5. Cancel Booking");
+            System.out.println("6. Check out");
+            System.out.println("5. Cancel Booking");
             System.out.println("6. Check Out");
             System.out.println("7. Exit");
             System.out.println();
@@ -199,6 +201,10 @@ public class Main {
 
                 case 5:
 
+                    System.out.print("Enter Room Number to Cancel Booking: ");
+                    int cancelRoom = sc.nextInt();
+
+                    manager.cancelBooking(cancelRoom);
                     System.out.println("\n==========================================");
                     System.out.println("          CANCEL BOOKING");
                     System.out.println("==========================================");

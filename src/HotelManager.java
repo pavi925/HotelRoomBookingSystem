@@ -5,18 +5,18 @@ public class HotelManager {
     private ArrayList<Room> rooms = new ArrayList<>();
     public HotelManager() {
 
-        rooms.add(new Room(101, "-", "Single", "-", "Available"));
-        rooms.add(new Room(102, "-", "Single", "-", "Available"));
-        rooms.add(new Room(103, "-", "Single", "-", "Available"));
+        rooms.add(new Room(101, "Single",  "Available"));
+        rooms.add(new Room(102,  "Single", "Available"));
+        rooms.add(new Room(103, "Single",  "Available"));
 
-        rooms.add(new Room(201, "-", "Double", "-", "Available"));
-        rooms.add(new Room(202, "-", "Double", "-", "Available"));
+        rooms.add(new Room(201,  "Double",  "Available"));
+        rooms.add(new Room(202, "Double",  "Available"));
 
-        rooms.add(new Room(301, "-", "Deluxe", "-", "Available"));
-        rooms.add(new Room(302, "-", "Deluxe", "-", "Available"));
+        rooms.add(new Room(301,  "Deluxe",  "Available"));
+        rooms.add(new Room(302,  "Deluxe",  "Available"));
 
-        rooms.add(new Room(401, "-", "Suite", "-", "Available"));
-        rooms.add(new Room(402, "-", "Suite", "-", "Available"));
+        rooms.add(new Room(401,  "Suite",  "Available"));
+        rooms.add(new Room(402,  "Suite",  "Available"));
 
     }
 
@@ -180,6 +180,8 @@ public class HotelManager {
         System.out.println("==========================================");
     }
 
+    // Update Booking
+    public void cancelBooking(int roomNo) {
     // Cancel Booking
     public void cancelBooking(int roomNo) {
 
@@ -188,6 +190,7 @@ public class HotelManager {
             if (room.getRoomNo() == roomNo) {
 
                 if (room.getStatus().equalsIgnoreCase("Available")) {
+                    System.out.println("No booking found for this room.");
                     System.out.println("No booking exists for this room.");
                     return;
                 }
@@ -195,7 +198,11 @@ public class HotelManager {
                 room.setGuestName("-");
                 room.setCheckInDate("-");
                 room.setStatus("Available");
+                room.setGuestName(null);
+                room.setCheckInDate(null);
+                room.setStatus("Available");
 
+                System.out.println("Booking Cancelled Successfully.");
                 System.out.println("\n==========================================");
                 System.out.println("      BOOKING CANCELLED");
                 System.out.println("==========================================");
