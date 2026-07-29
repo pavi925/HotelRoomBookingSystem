@@ -6,11 +6,9 @@ public class Room {
     private String checkInDate;
     private String status;
 
-    public Room(int roomNo, String guestName, String roomType, String checkInDate, String status) {
+    public Room(int roomNo, String roomType,  String status) {
         this.roomNo = roomNo;
-        this.guestName = guestName;
         this.roomType = roomType;
-        this.checkInDate = checkInDate;
         this.status = status;
     }
 
